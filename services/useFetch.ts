@@ -10,6 +10,7 @@ import { useEffect, useState } from "react"
             setLoading(true)
             setError(null)
             const result = await fetchFunction()
+            setLoading(false)
             setData(result)
         } catch (error) {
             if (error instanceof Error) {
@@ -25,7 +26,7 @@ import { useEffect, useState } from "react"
     const reset = () => {
         setData(null)
         setError(null)
-        setLoading(true)
+        setLoading(false)
     }
 
     useEffect(() => {
@@ -34,7 +35,7 @@ import { useEffect, useState } from "react"
         }
     }, [])
 
-    return { data, loading,error,refetch: fetchData, reset }
+    return { data, loading,error,refetch: fetchData, reset, setLoading }
 }
 
 export default useFetch;
